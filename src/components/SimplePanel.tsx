@@ -1,5 +1,5 @@
 import React from 'react';
-import { PanelProps } from '@grafana/data';
+import { DataFrameView, PanelProps } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
@@ -19,10 +19,17 @@ const getStyles = () => {
 
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = useStyles2(getStyles);
-  console.log(styles);
   const mermaidProps: MermaidProps = {
-    text: options.text
+    text: 'flowchart LR;'
   };
+  data.series.forEach((s) => {
+    const view = new DataFrameView(s);
+    view.forEach((row) => {
+      if (row[options.from] && row[options.to]) {
+        mermaidProps.text += row[options.from] + ' --> ' + row[options.to] + ';';
+      }
+    });
+  });
   return (
     <div
       className={cx(

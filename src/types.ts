@@ -1,3 +1,4 @@
 export interface SimpleOptions {
-  text: string;
+  from: string,
+  to: string;
 }

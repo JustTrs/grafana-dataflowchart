@@ -5,15 +5,15 @@ import { SimplePanel } from './components/SimplePanel';
 export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOptions((builder) => {
   return builder
     .addTextInput({
-      path: 'text',
-      name: 'Simple text option',
-      description: 'Graph definition',
-      defaultValue: `flowchart LR
-A --> B
-B --> C
-`,
-      settings: {
-        useTextarea: true
-      }
+      path: 'from',
+      name: 'Source',
+      description: 'Key name in data for source node',
+      defaultValue: 'from'
+    })
+    .addTextInput({
+      path: 'to',
+      name: 'Destination',
+      description: 'Key name in data for destination node',
+      defaultValue: 'to'
     });
 });
