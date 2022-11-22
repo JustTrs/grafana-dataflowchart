@@ -20,7 +20,7 @@ const getStyles = () => {
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = useStyles2(getStyles);
   const mermaidProps: MermaidProps = {
-    text: 'flowchart LR;'
+    text: 'flowchart ' + options.orientation + ';'
   };
   data.series.forEach((s) => {
     const view = new DataFrameView(s);
