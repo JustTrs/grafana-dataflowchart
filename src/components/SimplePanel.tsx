@@ -26,7 +26,20 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
     const view = new DataFrameView(s);
     view.forEach((row) => {
       if (row[options.from] && row[options.to]) {
-        mermaidProps.text += row[options.from] + ' --> ' + row[options.to] + ';';
+        mermaidProps.text += row[options.from];
+        if (options.text) {
+          mermaidProps.text += '-- ';
+          let link = options.text;
+          for (let m of options.text.matchAll(/data:(\w+)/g)) {
+            if (row[m[1]] ) {
+              link = link.replace(m[0], row[m[1]]);
+            }
+          }
+          mermaidProps.text += link + ' -->';
+        } else {
+          mermaidProps.text += ' --> ';
+        }
+        mermaidProps.text += row[options.to] + ';';
       }
     });
   });

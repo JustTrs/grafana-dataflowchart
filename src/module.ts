@@ -41,5 +41,11 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       name: 'Destination',
       description: 'Key name in data for destination node',
       defaultValue: 'to'
+    })
+    .addTextInput({
+      path: 'text',
+      name: 'Link text',
+      description: 'Template using "data:key_name_in_data" for substitution, void for no text at all',
+      defaultValue: ''
     });
 });
