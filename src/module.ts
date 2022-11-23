@@ -47,5 +47,11 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       name: 'Link text',
       description: 'Template using "data:key_name_in_data" for substitution, void for no text at all',
       defaultValue: ''
+    })
+    .addTextInput({
+      path: 'subgraph',
+      name: 'Subgraph hierarchy',
+      description: 'Syntax key1,key2,key3 to create a hierarchy of subgraphs',
+      defaultValue: ''
     });
 });

@@ -40,6 +40,24 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
           mermaidProps.text += ' --> ';
         }
         mermaidProps.text += row[options.to] + ';';
+        let subgraphs = '';
+        let add = true;
+        const template = options.subgraph.split(',');
+        template.forEach((elt, idx, array) => {
+          if (row[elt]) {
+            subgraphs += 'subgraph ' + row[elt] + ';';
+            if (idx === array.length - 1) {
+              subgraphs += row[options.from] + ';';
+              subgraphs += row[options.to] + ';';
+            }
+          } else {
+            add = false;
+          }
+        });
+        if (add) {
+          mermaidProps.text += subgraphs;
+          template.forEach(() => mermaidProps.text += ' end');
+        }
       }
     });
   });
