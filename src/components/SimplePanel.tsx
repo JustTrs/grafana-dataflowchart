@@ -17,6 +17,14 @@ const getStyles = () => {
   };
 };
 
+const substitute = (source: string, row: any): string => {
+  let res = source;
+  for (let m of source.matchAll(/data:(\w+)/g)) {
+    res = res.replace(m[0], ( row[m[1]] ? row[m[1]] : '' ));
+  }
+  return res;
+};
+
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = useStyles2(getStyles);
   const mermaidProps: MermaidProps = {
@@ -28,21 +36,14 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       if (row[options.from] && row[options.to]) {
         mermaidProps.text += row[options.from];
         if (options.text) {
-          mermaidProps.text += '-- ';
-          let link = options.text;
-          for (let m of options.text.matchAll(/data:(\w+)/g)) {
-            if (row[m[1]] ) {
-              link = link.replace(m[0], row[m[1]]);
-            }
-          }
-          mermaidProps.text += link + ' -->';
+          mermaidProps.text += '-- ' + substitute(options.text, row) + ' -->';
         } else {
           mermaidProps.text += ' --> ';
         }
         mermaidProps.text += row[options.to] + ';';
         let subgraphs = '';
         let add = true;
-        const template = options.subgraph.split(',');
+        const template: string[] = substitute(options.subgraph, row).split(',');
         template.forEach((elt, idx, array) => {
           if (row[elt]) {
             subgraphs += 'subgraph ' + row[elt] + ';';
@@ -57,6 +58,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
         if (add) {
           mermaidProps.text += subgraphs;
           template.forEach(() => mermaidProps.text += ' end');
+          mermaidProps.text += '\n';
         }
       }
     });
