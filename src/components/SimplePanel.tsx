@@ -27,8 +27,13 @@ const substitute = (source: string, row: any): string => {
 
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = useStyles2(getStyles);
+  const fit = `
+    svg#preview {
+      max-width: 100% !important;
+    }
+  `;
   const mermaidProps: MermaidProps = {
-    text: 'flowchart ' + options.orientation + ';'
+    text: 'flowchart ' + options.orientation + ';',
   };
   data.series.forEach((s) => {
     const view = new DataFrameView(s);
@@ -73,6 +78,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
         `
       )}
     >
+      <style>{fit}</style>
       <Mermaid {...mermaidProps}/>
     </div>
   );
