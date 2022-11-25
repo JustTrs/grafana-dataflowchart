@@ -51,7 +51,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
     .addTextInput({
       path: 'subgraph',
       name: 'Subgraph hierarchy',
-      description: 'Syntax key1,key2,key3 to create a hierarchy of subgraphs',
+      description: 'Syntax key1,key2,key3 to create a hierarchy of subgraphs, same substitution rules as for link text',
       defaultValue: ''
     });
 });
