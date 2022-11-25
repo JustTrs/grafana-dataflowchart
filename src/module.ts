@@ -4,7 +4,7 @@ import { SimplePanel } from './components/SimplePanel';
 
 export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOptions((builder) => {
   return builder
-    .addRadio({
+    .addSelect({
       path: 'orientation',
       name: 'Flowchart orientation',
       description: 'Supported orientation for the generated flowchart',
