@@ -38,35 +38,49 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
   data.series.forEach((s) => {
     const view = new DataFrameView(s);
     view.forEach((row) => {
-      if (row[options.from] && row[options.to]) {
-        mermaidProps.text += row[options.from];
+      let nodes: string[] = [];
+      if (row[options.from]) {
+        nodes.push(row[options.from]);
+      }
+      if (row[options.to]) {
+        nodes.push(row[options.to]);
+      }
+
+      // add link if both nodes are available
+      if (nodes.length === 2) {
+        mermaidProps.text += nodes[0];
         if (options.text) {
           mermaidProps.text += '-- ' + substitute(options.text, row) + ' -->';
         } else {
           mermaidProps.text += ' --> ';
         }
-        mermaidProps.text += row[options.to] + ';';
-        let subgraphs = '';
-        let add = true;
-        const template: string[] = substitute(options.subgraph, row).split(',');
-        template.forEach((elt, idx, array) => {
-          if (row[elt]) {
-            subgraphs += 'subgraph ' + row[elt] + ';';
-            if (idx === array.length - 1) {
-              subgraphs += row[options.from] + ';';
-              subgraphs += row[options.to] + ';';
-            }
-          } else {
-            add = false;
+        mermaidProps.text += nodes[1] + ';';
+      }
+
+      // add subgraphs if defined
+      if (!options.subgraph) {
+        return;
+      }
+      let subgraphs = '';
+      let add = true;
+      const template: string[] = substitute(options.subgraph, row).split(',');
+      template.forEach((elt, idx, array) => {
+        if (row[elt]) {
+          subgraphs += 'subgraph ' + row[elt] + ';';
+          if (idx === array.length - 1) {
+            nodes.forEach((elt) => { subgraphs += elt + ';'; });
           }
-        });
-        if (add) {
-          mermaidProps.text += subgraphs;
-          template.forEach(() => mermaidProps.text += ' end');
-          mermaidProps.text += '\n';
+        } else {
+          add = false;
         }
+      });
+      if (add) {
+        mermaidProps.text += subgraphs;
+        template.forEach(() => mermaidProps.text += ' end');
+        mermaidProps.text += ';';
       }
     });
+    console.log(mermaidProps.text);
   });
   return (
     <div
