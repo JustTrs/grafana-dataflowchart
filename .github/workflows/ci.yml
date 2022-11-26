@@ -1,14 +1,6 @@
 name: CI
+on: [push]
 
-on:
-  push:
-    branches:
-      - master
-      - main
-  pull_request:
-    branches:
-      - master
-      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,11 +37,17 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Lint
+        run: yarn lint
+
       - name: Build and test frontend
         run: yarn build
 
       - name: Start grafana docker
         run: yarn server -d
+
+      - name: Run tests
+        run: yarn test:ci
 
       - name: Run e2e tests
         run: yarn e2e
