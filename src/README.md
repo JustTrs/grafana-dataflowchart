@@ -3,3 +3,5 @@
 # Data Flowchart
 
 Display flowchart graph based on mermaid js from queried data
+
+Read more about it [here](https://github.com/JustTrs/grafana-dataflowchart).
