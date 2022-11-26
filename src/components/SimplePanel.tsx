@@ -33,7 +33,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
     }
   `;
   const mermaidProps: MermaidProps = {
-    text: 'flowchart ' + options.orientation + ';',
+    text: 'flowchart ' + options.orientation + '\n',
   };
   data.series.forEach((s) => {
     const view = new DataFrameView(s);
@@ -54,7 +54,7 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
         } else {
           mermaidProps.text += ' --> ';
         }
-        mermaidProps.text += nodes[1] + ';';
+        mermaidProps.text += nodes[1] + '\n';
       }
 
       // add subgraphs if defined
@@ -66,9 +66,10 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       const template: string[] = substitute(options.subgraph, row).split(',');
       template.forEach((elt, idx, array) => {
         if (row[elt]) {
-          subgraphs += 'subgraph ' + row[elt] + ';';
+          subgraphs += 'subgraph ' + row[elt] + '\ndirection ' +
+                       options.orientation + '\n';
           if (idx === array.length - 1) {
-            nodes.forEach((elt) => { subgraphs += elt + ';'; });
+            nodes.forEach((elt) => { subgraphs += elt + '\n'; });
           }
         } else {
           add = false;
@@ -76,11 +77,10 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       });
       if (add) {
         mermaidProps.text += subgraphs;
-        template.forEach(() => mermaidProps.text += ' end');
-        mermaidProps.text += ';';
+        template.forEach(() => mermaidProps.text += '\nend');
+        mermaidProps.text += '\n';
       }
     });
-    console.log(mermaidProps.text);
   });
   return (
     <div
