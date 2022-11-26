@@ -1,7 +1,9 @@
-type SeriesSize = 'sm' | 'md' | 'lg';
+type Orientation = 'LR' | 'TB';
 
 export interface SimpleOptions {
-  text: string;
-  showSeriesCount: boolean;
-  seriesCountSize: SeriesSize;
+  from: string,
+  orientation: Orientation,
+  subgraph: string,
+  text: string,
+  to: string
 }

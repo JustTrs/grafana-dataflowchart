@@ -5,9 +5,10 @@
   "id": "justtrs-dataflowchart-panel",
   "info": {
     "keywords": ["panel"],
-    "description": "Display flowchart graph based on mermaid js from queried data",
+    "description": "Display a flowchart graph using MermaidJS from queried data",
     "author": {
-      "name": "Just trs"
+      "name": "JustTRS",
+      "url": "https://github.com/JustTrs/grafana-dataflowchart"
     },
     "logos": {
       "small": "img/logo.svg",
@@ -15,12 +16,12 @@
     },
     "links": [
       {
-        "name": "Website",
-        "url": "https://github.com/grafana/grafana-starter-panel"
+        "name": "Project site",
+        "url": "https://github.com/JustTrs/grafana-dataflowchart"
       },
       {
         "name": "License",
-        "url": "https://github.com/grafana/grafana-starter-panel/blob/master/LICENSE"
+        "url": "https://github.com/JustTrs//grafana-dataflowchart/blob/master/LICENSE"
       }
     ],
     "screenshots": [],

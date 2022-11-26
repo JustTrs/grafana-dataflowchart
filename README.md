@@ -1,81 +1,35 @@
-# Grafana panel plugin template
+# Grafana Plugin Data Flowchart
 
-This template is a starting point for building a panel plugin for Grafana.
+This plugin displays a flowchart graph using [MermaidJS](https://github.com/mermaid-js/mermaid)
+from queried data.
 
-## What are Grafana panel plugins?
+## Use cases
 
-Panel plugins allow you to add new types of visualizations to your dashboard, such as maps, clocks, pie charts, lists, and more.
+### Simple flowchart
 
-Use panel plugins when you want to do things like visualize data returned by data source queries, navigate between dashboards, or control external systems (such as smart home devices).
+![Very simple graph](./images/use-case-simple.png)
 
-## Getting started
+### Link templates
 
-### Frontend
+![Link text](./images/use-case-link-template.png)
 
-1. Install dependencies
+Templates `data:(\w+)` are subtituted from row data.
 
-   ```bash
-   yarn install
-   ```
+### Subgraphs
 
-2. Build plugin in development mode or run in watch mode
+![Subgraphs](./images/use-case-subgraph-link.png)
 
-   ```bash
-   yarn dev
+Linked nodes are put in the same subgraph.
 
-   # or
+### Subgraphs templates
 
-   yarn watch
-   ```
+![Subgraphs templates](./images/use-case-subgraph-templates.png)
 
-3. Build plugin in production mode
+Same subtitution as in link templates: it's possible to declare all or part of
+subgraph in row data.
 
-   ```bash
-   yarn build
-   ```
+### Different subgraphs for linked nodes
 
-4. Run the tests (using Jest)
+![Distinct subgraphs](./images/use-case-subgraph-by-node.png)
 
-   ```bash
-   # Runs the tests and watches for changes
-   yarn test
-   
-   # Exists after running all the tests
-   yarn lint:ci
-   ```
-
-5. Spin up a Grafana instance and run the plugin inside it (using Docker)
-
-   ```bash
-   yarn server
-   ```
-
-6. Run the E2E tests (using Cypress)
-
-   ```bash
-   # Spin up a Grafana instance first that we tests against 
-   yarn server
-   
-   # Start the tests
-   yarn e2e
-   ```
-
-7. Run the linter
-
-   ```bash
-   yarn lint
-   
-   # or
-
-   yarn lint:fix
-   ```
-
-
-
-## Learn more
-
-Below you can find source code for existing app plugins and other related documentation.
-
-- [Basic panel plugin example](https://github.com/grafana/grafana-plugin-examples/tree/master/examples/panel-basic#readme)
-- [Plugin.json documentation](https://grafana.com/docs/grafana/latest/developers/plugins/metadata/)
-- [How to sign a plugin?](https://grafana.com/docs/grafana/latest/developers/plugins/sign-a-plugin/)
+It's possible to declare single nodes in row data, with then different subgraphs.

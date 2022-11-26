@@ -30,5 +30,8 @@ e2e-results/
 
 # Editor
 .idea
+*~
+*.sw[a-z]
+*.bak
 
 .eslintcache

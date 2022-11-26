@@ -4,37 +4,54 @@ import { SimplePanel } from './components/SimplePanel';
 
 export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOptions((builder) => {
   return builder
-    .addTextInput({
-      path: 'text',
-      name: 'Simple text option',
-      description: 'Description of panel option',
-      defaultValue: 'Default value of text input option',
-    })
-    .addBooleanSwitch({
-      path: 'showSeriesCount',
-      name: 'Show series counter',
-      defaultValue: false,
-    })
-    .addRadio({
-      path: 'seriesCountSize',
-      defaultValue: 'sm',
-      name: 'Series counter size',
+    .addSelect({
+      path: 'orientation',
+      name: 'Flowchart orientation',
+      description: 'Also used in subgraphs',
+      defaultValue: 'LR',
       settings: {
         options: [
           {
-            value: 'sm',
-            label: 'Small',
+            value: 'BT',
+            label: 'Bottom to top'
           },
           {
-            value: 'md',
-            label: 'Medium',
+            value: 'LR',
+            label: 'Left to right'
           },
           {
-            value: 'lg',
-            label: 'Large',
+            value: 'RL',
+            label: 'Right to left'
           },
-        ],
-      },
-      showIf: (config) => config.showSeriesCount,
+          {
+            value: 'TB',
+            label: 'Top to bottom'
+          }
+        ]
+      }
+    })
+    .addTextInput({
+      path: 'from',
+      name: 'Source',
+      description: 'Key name in data for source node',
+      defaultValue: 'from'
+    })
+    .addTextInput({
+      path: 'to',
+      name: 'Destination',
+      description: 'Key name in data for destination node',
+      defaultValue: 'to'
+    })
+    .addTextInput({
+      path: 'text',
+      name: 'Link text',
+      description: 'Template using "data:key_name_in_data" for substitution, void for no text at all',
+      defaultValue: ''
+    })
+    .addTextInput({
+      path: 'subgraph',
+      name: 'Subgraph hierarchy',
+      description: 'Syntax key1,key2,key3 to create a hierarchy of subgraphs, same substitution rules as for link text',
+      defaultValue: ''
     });
 });
