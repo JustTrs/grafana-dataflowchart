@@ -7,7 +7,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
     .addSelect({
       path: 'orientation',
       name: 'Flowchart orientation',
-      description: 'Supported orientation for the generated flowchart',
+      description: 'Also used in subgraphs',
       defaultValue: 'LR',
       settings: {
         options: [
