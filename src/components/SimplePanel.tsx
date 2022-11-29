@@ -50,11 +50,10 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
       if (nodes.length === 2) {
         mermaidProps.text += nodes[0];
         if (options.text) {
-          mermaidProps.text += '-- ' + substitute(options.text, row) + ' -->';
-        } else {
-          mermaidProps.text += ' --> ';
+          const txt = substitute(options.text, row);
+          mermaidProps.text += (txt.trim().length ? (' -- ' + txt) : '');
         }
-        mermaidProps.text += nodes[1] + '\n';
+        mermaidProps.text += ' --> ' + nodes[1] + '\n';
       }
 
       // add subgraphs if defined
