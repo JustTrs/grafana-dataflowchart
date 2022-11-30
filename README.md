@@ -9,6 +9,12 @@ from queried data.
 
 ![Very simple graph](./images/use-case-simple.png)
 
+### Node shape and ID
+
+![Node shapes](./images/use-case-node-shape-id.png)
+
+Identifiers and shapes in data are directly used.
+
 ### Link templates
 
 ![Link text](./images/use-case-link-template.png)
